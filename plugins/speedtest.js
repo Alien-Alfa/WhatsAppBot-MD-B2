@@ -8,13 +8,15 @@ let format = sizeFormatter({
   render: (literal, symbol) => `${literal} ${symbol}B`,
 })
 let handler = async (m) => {
+  try { 
   const used = process.memoryUsage()
   const cpus = os.cpus().map(cpu => {
     cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
     return cpu
   })
-  const cpu = cpus.reduce((last, cpu, _, { length }) => {
-    last.total += cpu.total
+  const cpu = cpus.reduce((last, cpu, _, { length    }) => {
+
+  last.total += cpu.total
     last.speed += cpu.speed / length
     last.times.user += cpu.times.user
     last.times.nice += cpu.times.nice
@@ -34,7 +36,7 @@ let handler = async (m) => {
     }
   })
   let old = performance.now()
-  await conn.reply(m.chat, '_Testing speed..._')
+  await msgsz.reply(m.chat, '_Testing speed..._')
   let neww = performance.now()
   let speed = neww - old
   let txt = `
@@ -52,9 +54,21 @@ ${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type =>
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
 `.trim()
-  conn.reply(m.chat, txt)
+  msgsz.reply(m.chat, txt)
 }
-handler.help1 = ['sᴘᴇᴇᴅᴛᴇsᴛ']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['sᴘᴇᴇᴅᴛᴇsᴛ']
 handler.help = ['𝚂𝙿𝙴𝙴𝙳𝚃𝙴𝚂𝚃']
 handler.tags = ['info']
 

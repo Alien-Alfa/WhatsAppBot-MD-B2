@@ -17,7 +17,7 @@ let handler  = async (m, _2) => {
     _return = await exec.call(msgsz, (...args) => {
       if (--i < 1) return
       console.log(...args)
-      return conn.reply(m.chat, util.format(...args))
+      return msgsz.reply(m.chat, util.format(...args))
     }, m, handler, require, msgsz, CustomArray, process, args, groupMetadata, f, f.exports, [msgsz, _2])
   } catch (e) {
     let err = await syntaxerror(_text, 'Execution Function', {
@@ -27,7 +27,7 @@ let handler  = async (m, _2) => {
     if (err) _syntax = '```' + err + '```\n\n'
     _return = e
   } finally {
-    conn.reply(m.chat, _syntax + util.format(_return))
+    msgsz.reply(m.chat, _syntax + util.format(_return))
     m.exp = old
   }
 }

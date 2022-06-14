@@ -17,7 +17,7 @@ handler.before = async function (m) {
             if (!img) return
             this.sendStimg(m.chat, img, m, { packname: packname, author: author })
         } else if (/video/.test(mime)) {
-            if ((q.msg || q).seconds > 15) throw false // conn.reply(m.chat, 'Maksimal 10 detik!')
+            if ((q.msg || q).seconds > 15) throw false // msgsz.reply(m.chat, 'Maksimal 10 detik!')
             let vid = await q.download()
             if (!vid) return
             this.sendStimg(m.chat, vid, m, { packname: packname, author: author })  

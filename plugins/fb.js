@@ -1,10 +1,10 @@
 const { facebookdl, facebookdlv2, facebookdlv3 } = require('@bochilteam/scraper')
 const { Facebook } = require('xfarr-api')
 let fetch = require('node-fetch')
-let handler = async (m, { msgsz, args, usedPrefix, command }) => {
-  if (!args[0]) throw `${nolink}\n\nExample:\n*${usedPrefix + command}* https://fb.watch/aYv0jAffAO/`
+let handler = async (m, { msgsz, args, usedPrefix, command    }) => {
+ try {   if (!args[0]) throw `${nolink}\n\nExample:\n*${usedPrefix + command}* https://fb.watch/aYv0jAffAO/`
   if (!args[0].match(/(https:\/\/.www.facebook.com || fb.watch)/gi)) throw `*Link salah! Perintah ini untuk mengunduh media facebook dengan link*\n\nExample:\n${usedPrefix + command} https://fb.watch/aYv0jAffAO/`
-  await conn.reply(m.chat, wait)
+  await msgsz.reply(m.chat, wait)
   await msgsz.reply(m.chat, 'Downloading media from Facebook', 0, {
   contextInfo: { mentionedJid: [m.sender],
     externalAdReply :{
@@ -56,7 +56,21 @@ let handler = async (m, { msgsz, args, usedPrefix, command }) => {
     }
   }
 }
-handler.help1 = ['ғᴀᴄᴇʙᴏᴏᴋ'].map(v => v + ' <ᴜʀʟ>')
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ғᴀᴄᴇʙᴏᴏᴋ'].map(v => v + ' <ᴜʀʟ>')
 handler.help = ['𝙵𝙰𝙲𝙴𝙱𝙾𝙾𝙺'].map(v => v + '')
 
 handler.tags = ['downloader']

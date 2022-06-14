@@ -13,7 +13,7 @@ var defaultMenu = {
 
 
     before: '╭────────────────╮\n'.trimStart(),
-    before1:' |                      ᴀʟɪᴇɴ ᴀʟꜰᴀ                        |\n'.trimStart(),
+    before1:' |                      ᴀʟɪᴇɴ ᴀʟꜰᴀ                        |\n',
     before2:'╰────────────────╯\n'.trimStart(),
     before3:'╭────────────────\n'.trimStart(),
 
@@ -25,8 +25,8 @@ var defaultMenu = {
 }
 
 
-let handler = async (m, { msgsz, usedPrefix: _p, args, command }) => {
-  let tags
+let handler = async (m, { msgsz, usedPrefix: _p, args, command    }) => {
+ try {   let tags
   let teks = `${args[0]}`.toLowerCase()
   let arrayMenu = ['bonk']
   if (!arrayMenu.includes(teks)) teks = '404'
@@ -186,7 +186,21 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     throw e
   }
 }
-handler.help1 = ['menu', 'help', '?']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['menu', 'help', '?']
 handler.help = ['𝙼𝙴𝙽𝚄']
 
 handler.tags = ['main']

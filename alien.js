@@ -39,27 +39,8 @@ global.timestamp = {
 }
 
 const PORT = process.env.PORT || 3000
-
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-
-
-
-
-
-
-
 global.prefix = new RegExp('^[' + (opts['prefix'] || '‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
-
-//global.prefix = new RegExp('^', 'gi')
-
-
-
-
-
-
-
-
-
 global.db = new Low(
   /https?:\/\//.test(opts['db'] || '') ?
     new cloudDBAdapter(opts['db']) : /mongodb/.test(opts['db']) ?
@@ -85,22 +66,12 @@ global.loadDatabase = async function loadDatabase() {
   global.db.chain = _.chain(global.db.data)
 }
 loadDatabase()
-
-// if (opts['cluster']) {
-//   require('./lib/cluster').Cluster()
-// }
-
-
 console.log(require('chalk').redBright('Waiting 3 seconds to Generate your session file'))
 setTimeout(() => {
-
 if(!fs.existsSync('./session.alfa.json')) process.send('forever restart') 
 global.isInit = !fs.existsSync(authFile)
 const { state, saveState } = useSingleFileAuthState(global.authFile)
-//process.send('forever restart') 
-//if(!fs.existsSync('./session.alfa.json')) process.send('forever restart') 
 console.log(require('chalk').redBright('Process Exited: No authFile'))
-//setTimeout(() => { process.send('reset') }, 18000000)
 
 
 const connectionOptions = {

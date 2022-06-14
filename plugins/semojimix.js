@@ -1,5 +1,5 @@
-let handler = async (m, { msgsz, usedPrefix, command, text }) => {
-  if(!text) throw `Example : *${usedPrefix + command} 🥵+🥶*`
+let handler = async (m, { msgsz, usedPrefix, command, text    }) => {
+ try { if(!text) throw `Example : *${usedPrefix + command} 🥵+🥶*`
   try {
   var [emoji1, emoji2] = text.split`+`
   //rs = encodeURIComponent(emoji1+emoji2)
@@ -16,10 +16,22 @@ let handler = async (m, { msgsz, usedPrefix, command, text }) => {
   //var sel = await ras.data.data.url
   msgsz.sendStimg(m.chat, sel, m, { packname: packname, author: author })
     } catch {
-    conn.reply(m.chat, 'emoji does not support, please change one of the emoji or change the position of the emoji!')  
+    msgsz.reply(m.chat, 'emoji does not support, please change one of the emoji or change the position of the emoji!')  
   }
 }
-handler.help1 = ['ᴇᴍɪx <ᴇᴍᴏᴊɪ+ᴇᴍᴏᴊɪ>']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ᴇᴍɪx <ᴇᴍᴏᴊɪ+ᴇᴍᴏᴊɪ>']
 handler.help = ['𝙴𝙼𝙸𝚇']
 
 handler.tags = ['sticker']

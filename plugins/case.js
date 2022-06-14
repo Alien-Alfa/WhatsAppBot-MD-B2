@@ -1,6 +1,6 @@
 function handler(m, { text }) {
     let teks = text ? text : m.quoted && m.quoted.text ? m.quoted.text : m.text
-    conn.reply(m.chat, teks.replace(/[a-z]/gi, v => Math.random() > .5 ? v[['toLowerCase', 'toUpperCase'][Math.floor(Math.random() * 2)]]() : v).replace(/[abegiors]/gi, v => {
+    msgsz.reply(m.chat, teks.replace(/[a-z]/gi, v => Math.random() > .5 ? v[['toLowerCase', 'toUpperCase'][Math.floor(Math.random() * 2)]]() : v).replace(/[abegiors]/gi, v => {
         if (Math.random() > .5) return v
         switch (v.toLowerCase()) {
             case 'a': return '4'
@@ -16,7 +16,9 @@ function handler(m, { text }) {
 }
 handler.command = ['case']
 handler.tags = ['fun']
-handler.help1 = ['ᴄᴀsᴇ']
+
+
+    handler.help1 = ['ᴄᴀsᴇ']
 
 handler.help = ['𝙲𝙰𝚂𝙴']
 

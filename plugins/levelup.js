@@ -1,8 +1,8 @@
 let fetch = require('node-fetch')
 let levelling = require('../lib/levelling')
 
-let handler = async (m, { msgsz, usedPrefix }) => {
-let pp = 'https://telegra.ph/file/e891ab641d5d71c70d938.png'
+let handler = async (m, { msgsz, usedPrefix    }) => {
+ try { let pp = 'https://telegra.ph/file/e891ab641d5d71c70d938.png'
   let who = m.sender
   let name = msgsz.getName(m.sender)
   let discriminator = who.substring(9, 13)
@@ -32,7 +32,21 @@ let pp = 'https://telegra.ph/file/e891ab641d5d71c70d938.png'
   }
 }
 
-handler.help1 = ['ʟᴇᴠᴇʟᴜᴘ']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ʟᴇᴠᴇʟᴜᴘ']
 handler.help = ['𝙻𝙴𝚅𝙴𝙻𝚄𝙿']
 handler.tags = ['xp']
 handler.command = /^levelup$/i

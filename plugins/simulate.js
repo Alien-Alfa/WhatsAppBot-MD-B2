@@ -1,10 +1,10 @@
-let handler = async (m, { msgsz, args: [event], text }) => {
-    if (!event) throw `List Event: welcome, bye, delete, promote, demote`
+let handler = async (m, { msgsz, args: [event], text    }) => {
+ try {   if (!event) throw `List Event: welcome, bye, delete, promote, demote`
     let mentions = text.replace(event, '').trimStart()
     let who = mentions ? msgsz.parseMention(mentions) : []
     let participants = who.length ? who : [m.sender]
     let action = false
-    conn.reply(m.chat, `Simulating ${event}...`)
+    msgsz.reply(m.chat, `Simulating ${event}...`)
     switch (event.toLowerCase()) {
         case 'add':
         case 'invite':
@@ -36,7 +36,19 @@ let handler = async (m, { msgsz, args: [event], text }) => {
     })
     return msgsz.onDelete(m)
 }
-handler.help1 = ['sɪᴍᴜʟᴀᴛᴇ <ᴇᴠᴇɴᴛ> [@ᴍᴇɴᴛɪᴏɴ]']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['sɪᴍᴜʟᴀᴛᴇ <ᴇᴠᴇɴᴛ> [@ᴍᴇɴᴛɪᴏɴ]']
 handler.help = ['𝚂𝙸𝙼𝚄𝙻𝙰𝚃𝙴']
 handler.tags = ['owner']
 

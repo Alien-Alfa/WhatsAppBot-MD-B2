@@ -7,20 +7,20 @@ let { perfomance } = require('perf_hooks')
 let moment = require('moment-timezone')
 const { default: Users } = require('node-os-utils/lib/users')
 const defaultMenu = {
-  before: '╭────────────────╮\n'.trimStart(),
-  before1:' |                      ᴀʟɪᴇɴ ᴀʟꜰᴀ                        |\n'.trimStart(),
-  before2:'╰────────────────╯\n'.trimStart(),
+  before: '╭────────────────╮'.trimStart(),
+  before1:' |                      ᴀʟɪᴇɴ ᴀʟꜰᴀ                        |'.trimStart(),
+  before2:'╰────────────────╯'.trimStart(),
 
 
-  header: `${sa}${kki} ${zt}%category${zt} ${kka}`,
-  body: `${gz}  %cmd${zc} %islimit %isPremium`,
-  footer: `${sb}\n`,
+  header: `${sa1}${kki1} ${zt}%category${zt} ${kka1}${gy1}\n${gx1}`,
+  body: `${gz1}  %cmd${zc}`,
+  footer: `${sb1}\n`,
           after: ``,
 }
 
 
-let handler = async (m, { msgsz, usedPrefix: _p, args, command }) => {
-  let tags
+let handler = async (m, { msgsz, usedPrefix: _p, args, command    }) => {
+ try {   let tags
   let teks = `${args[0]}`.toLowerCase()
   let arrayMenu = ['all', 'absen', 'rpg', 'anime', 'downloader', 'game', 'fun', 'xp', 'github', 'group', 'image', 'quotes', 'admin', 'info', 'internet', 'islam', 'kerang', 'maker', 'owner', 'suara', 'premium', 'quotes', 'info', 'stalk', 'shortlink', 'sticker', 'tools']
   if (!arrayMenu.includes(teks)) teks = '404'
@@ -219,7 +219,7 @@ let listdesc = process.env.MENU_HEAD === undefined ? `┏━━━━`+global.bo
             description: `${listdesc}`,
             buttonText: 'LIST MENU',
             listType: 1,
-            footerText: global.mainfooter,
+            footerText: wm,
             mtype: 'listMessage',
             sections: [
               {
@@ -375,7 +375,7 @@ let listdesc = process.env.MENU_HEAD === undefined ? `┏━━━━`+global.bo
 
     if (menuimgs === null ) {return  await msgsz.sendTBA2(m.chat, text, wm, linkbuttid1, butturl1, linkbuttid2, butturl2, menubutton1, menubuttonid1, menubutton2, menubuttonid2, menubutton3, menubuttonid3) }
 
-    else { return await msgsz.sendTBIA(m.chat, text, wm, menuimgs, linkbuttid1, butturl1, linkbuttid2, butturl2, menubutton1, menubuttonid1, menubutton2, menubuttonid2, menubutton3, menubuttonid3)}
+    else { return await msgsz.sendTBIA(m.chat, text, menuimgs, wm, linkbuttid1, butturl1, linkbuttid2, butturl2, menubutton1, menubuttonid1, menubutton2, menubuttonid2, menubutton3, menubuttonid3)}
 let id = global.owner+'@s.whatsapp.net'
 
   } catch (e) {
@@ -383,8 +383,24 @@ let id = global.owner+'@s.whatsapp.net'
     throw e
   }
 }
-handler.help1 = ['menu', 'help1', '?']
-handler.help1 = ['𝙼𝙴𝙽𝚄']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['menu', 'help1', '?']
+  
+
+    handler.help = ['𝙼𝙴𝙽𝚄']
 
 handler.tags = ['main']
 handler.command = /^(melp|\?)$/i

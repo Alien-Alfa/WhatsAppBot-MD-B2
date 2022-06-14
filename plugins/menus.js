@@ -1,5 +1,5 @@
-let handler = async (m, { usedPrefix, command, msgsz }) => {
-   let _uptime = process.uptime() * 1000
+let handler = async (m, { usedPrefix, command, msgsz    }) => {
+ try {    let _uptime = process.uptime() * 1000
     let uptimex = clockString(_uptime)
     let fetch = require('node-fetch')
 
@@ -10,9 +10,23 @@ let handler = async (m, { usedPrefix, command, msgsz }) => {
 
 
 
-    msgsz.sendTB(m.chat, `ㅤAlien Alfa BETA2\n\n😻 I am Alive \n` + `${uptimex}`, wm, linkbuttid1, butturl1, 'ꜱᴏᴜʀᴄᴇ', 'https://github.com/Alien-alfa/WhatsAppBot-MD', 'ʟɪꜱᴛ ᴍᴇɴᴜ', `.melp`, 'ᴀʟʟ ᴍᴇɴᴜ', '.] bonk', null, null, m) 
+    msgsz.sendTB(m.chat, `Alien Alfa BETA2 testbot\n\n😻 I am Alive \n` + `${uptimex}`, wm, linkbuttid1, butturl1, 'ꜱᴏᴜʀᴄᴇ', 'https://github.com/Alien-alfa/WhatsAppBot-MD', 'ʟɪꜱᴛ ᴍᴇɴᴜ', `.melp`, 'ᴀʟʟ ᴍᴇɴᴜ', '.] bonk', null, null, m) 
   }
-  handler.help1 = ['Menu']
+     
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['Menu']
   handler.help = ['𝙼𝙴𝙽𝚄']
   
   handler.tags = ['main']

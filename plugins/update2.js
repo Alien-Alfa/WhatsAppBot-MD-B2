@@ -22,18 +22,19 @@ async function handler(m, { text }) {
     }
     res.body.pipe(createWriteStream(filename))
     res.body.once('end', () => {
-        conn.reply(m.chat, 'Update successfully!')
+        msgsz.reply(m.chat, 'Update successfully!')
         msgsz.sendFile(m.chat, filename, text, null, m).catch(console.error)
     })
 }
 
 handler.all = async m => {
+    try { 
     if (!(m.sender in confirmation)) return
     let { res, filename, text, timeout } = confirmation[m.sender]
     if (/^y(es|a)?$/i.test(m.text)) {
         res.body.pipe(createWriteStream(filename))
         res.body.once('end', () => {
-            conn.reply(m.chat, 'Done overwrite!')
+            msgsz.reply(m.chat, 'Done overwrite!')
             msgsz.sendFile(m.chat, filename, text, null, m).catch(console.error)
         })
         clearTimeout(timeout)
@@ -41,12 +42,24 @@ handler.all = async m => {
         return !0
     } else if (/^no?$/i.test(m.text)) {
         delete confirmation[m.sender]
-        conn.reply(m.chat, 'Rejected')
+        msgsz.reply(m.chat, 'Rejected')
         clearTimeout(timeout)
         return !0
     }
 }
-handler.help1 = ['push']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['push']
 handler.help = ['𝙿𝚄𝚂𝙷']
 handler.tags = ['host']
 handler.command = ['push']

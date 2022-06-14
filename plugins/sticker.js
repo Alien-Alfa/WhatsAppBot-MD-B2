@@ -1,6 +1,6 @@
 let { webp2png } = require('../lib/webp2mp4')
-let handler = async (m, { msgsz, usedPrefix, command, text, args }) => {
-    //try {
+let handler = async (m, { msgsz, usedPrefix, command, text, args    }) => {
+ try {   //try {
     var q = m.quoted ? m.quoted : m
     if(!q) throw `Send or reply to media with caption *${usedPrefix}${command}*\nNote: 10 second max video`
     var mime = (q.msg || q).mimetype || ''
@@ -30,7 +30,19 @@ let handler = async (m, { msgsz, usedPrefix, command, text, args }) => {
         if(sel) msgsz.sendStimg(m.chat, sel, m, { packname: packname, author: author })
         }
 }
-handler.help1 = ['sticker <reply/send media>']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['sticker <reply/send media>']
 handler.help = ['𝚂𝚃𝙸𝙲𝙺𝙴𝚁']
 handler.tags = ['sticker']
 handler.command = /^(s|stiker|sticker)$/i

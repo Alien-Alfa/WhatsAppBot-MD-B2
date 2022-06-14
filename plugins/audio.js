@@ -1,7 +1,7 @@
 const { toAudio, toPTT } = require('../lib/converter')
 
-let handler = async (m, { msgsz, usedPrefix, command }) => {
-  let q = m.quoted ? m.quoted : m
+let handler = async (m, { msgsz, usedPrefix, command    }) => {
+ try {   let q = m.quoted ? m.quoted : m
   let mime = (m.quoted ? m.quoted : m.msg).mimetype || ''
   if (/mp3|a(udio)?$/i.test(command)) {
     if (!/video|audio/.test(mime)) throw `Reply video/audio with command *${usedPrefix + command}*`
@@ -20,7 +20,21 @@ let handler = async (m, { msgsz, usedPrefix, command }) => {
     await msgsz.sendFile(m.chat, audio.data, 'file.mp4', '', m, 1, { mimetype: 'audio/mp4' })
   }
 }
-handler.help1 = ['ᴍᴘ3', 'ᴠɴ']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ᴍᴘ3', 'ᴠɴ']
 
 handler.help = ['𝙼𝙿𝟹']
 handler.help = ['𝚅𝙽']

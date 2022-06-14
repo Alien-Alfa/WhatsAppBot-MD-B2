@@ -5,9 +5,10 @@ Alien Alfa Bot MD
 */
 
 let handler  = async (m, { msgsz, text }) => {
+  try { 
 
   if (!m.quoted) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted.sender
-     else who = m.quoted.sender ? m.quoted.sender : m.sender || text
+     else who = m.quoted.sender ? m.quoted.sender : m.sender || args
     
   let res = await fetch(`https://neeraj-x0-api.up.railway.app/api/truecaller?q=${who.split('@')[0]}&apikey=Alien-Alfa`)
   let json = await res.json()
@@ -39,27 +40,40 @@ let handler  = async (m, { msgsz, text }) => {
     })
 
   let result = `
-  ${sa}${kki} *ᴛʀᴜᴇᴄᴀʟʟᴇʀ* ${kka} 
-  ${gy} Number: ${number}
-  ${gy} Name: ${name}
-  ${gy} AltName: ${altname}
-  ${gy} Access: ${Access}
-  ${gy} Career: ${Career}
-  ${gy} Country: ${Country}
-  ${gy} City: ${City}
-  ${gy} Prefix: ${Prefix}
-  ${gy} Score: ${Score}
-  ${gy} UID: ${UID}
-  ${gy} Number type: ${type}
-  ${gy} Timezone: ${Timezone}
-  ${sb}`
+${sa1}${kki1} *ᴛʀᴜᴇᴄᴀʟʟᴇʀ* ${kka1}${gy1}
+${gx1}
+${gy2} Number: ${number}
+${gy2} Name: ${name}
+${gy2} AltName: ${altname}
+${gy2} Access: ${Access}
+${gy2} Career: ${Career}
+${gy2} Country: ${Country}
+${gy2} City: ${City}
+${gy2} Prefix: ${Prefix}
+${gy2} Score: ${Score}
+${gy2} UID: ${UID}
+${gy2} Number type: ${type}
+${gy2} Timezone: ${Timezone}
+${sb1}`.trim()
 
-  var as = `Date :${date}\nTime : ${a} (WIB)`
+ 
 
-  msgsz.sendTBA(m.chat, result, `${as}\n`+wm, linkbuttid1, butturl1, null, null, null, null, m)
+  msgsz.sendTBA(m.chat, result, wm, linkbuttid1, butturl1, null, null, null, null, m)
   }}}
 }
-handler.help1 = ['ᴛʀᴜᴇ']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ᴛʀᴜᴇ']
 handler.help = ['𝚃𝚁𝚄𝙴']
 handler.tags = ['tools']
 handler.command = /^true$/i

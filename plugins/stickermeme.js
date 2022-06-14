@@ -1,6 +1,6 @@
 const uploadImage = require('../lib/uploadImage')
-let handler = async (m, { msgsz, text, usedPrefix, command }) => {
-    
+let handler = async (m, { msgsz, text, usedPrefix, command    }) => {
+ try {   
     let [atas, bawah] = text.split`,`
     let q = m.quoted ? m.quoted : m
     let mime = (q.msg || q).mimetype || ''
@@ -12,7 +12,19 @@ let handler = async (m, { msgsz, text, usedPrefix, command }) => {
     msgsz.sendStimg(m.chat, meme, m, { packname: packname, author: author })
 
 }
-handler.help1 = ['sᴛɪᴄᴋᴇʀᴍᴇᴍᴇ  <ᴛᴇxᴛ>,<ᴛᴇxᴛ>']
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['sᴛɪᴄᴋᴇʀᴍᴇᴍᴇ  <ᴛᴇxᴛ>,<ᴛᴇxᴛ>']
 handler.help = ['𝚂𝚃𝙸𝙲𝙺𝙴𝚁𝙼𝙴𝙼𝙴']
 handler.tags = ['sticker']
 handler.command = /^(s(tic?ker)?me(me)?)$/i

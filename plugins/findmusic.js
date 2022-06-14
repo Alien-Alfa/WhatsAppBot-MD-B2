@@ -2,11 +2,12 @@ let fs = require('fs')
 let acrcloud = require('acrcloud')
 let acr = new acrcloud({
 	host: 'identify-eu-west-1.acrcloud.com',
-	access_key: 'f692756eebf6326010ab8694246d80e7',
-	access_secret: 'm2KQYmHdBCthmD7sOTtBExB9089TL7hiAazcUEmb'
+	access_key: 'c816ad50a2bd6282e07b90447d93c38c',
+	access_secret: 'ZpYSwmCFpRovcSQBCFCe1KArX7xt8DTkYx2XKiIP'
 })
 
 let handler = async (m) => {
+	try {
 	let q = m.quoted ? m.quoted : m
 	let mime = (q.msg || q).mimetype || ''
 	if (/audio|video/.test(mime)) {
@@ -25,10 +26,24 @@ let handler = async (m) => {
 *• Release Date:* ${release_date}
 `.trim()
 		fs.unlinkSync(`./${m.sender}.${ext}`)
-		await conn.reply(m.chat, txt)
+		await msgsz.reply(m.chat, txt)
 	} else throw 'Reply audio/video!'
 }
-handler.help1 = ['ғɪɴᴅ <ʀᴇᴘʟʏ>']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ғɪɴᴅ <ʀᴇᴘʟʏ>']
 handler.help = ['𝙵𝙸𝙽𝙳']
 
 handler.tags = ['tools']

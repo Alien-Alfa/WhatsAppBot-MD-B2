@@ -1,8 +1,8 @@
 /* const { generateThumbnail } = require("@adiwajshing/baileys")
 const { ms } = require("translate-google/languages")
 
-let handler = async(m, { msgsz }) => {
-  let msg = "🎈ɴᴏ ᴄᴀʟʟs ᴏɴʟʏ ᴍᴇssᴀɢᴇ"
+let handler = async(m, { msgsz    }) => {
+ try { let msg = "🎈ɴᴏ ᴄᴀʟʟs ᴏɴʟʏ ᴍᴇssᴀɢᴇ"
   let name= m.sender
   let mail = 'alienalfa.yt@gmail.com'
   let verfication = { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(m.chat ? { remoteJid: '120363040549014341@g.us' } : {}) }, message: { contactMessage: { displayName: `${await msgsz.getName(name)}`, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:;a,;;;\nFN:${name}\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`}}}

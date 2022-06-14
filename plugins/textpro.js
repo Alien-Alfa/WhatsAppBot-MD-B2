@@ -1,6 +1,7 @@
 const axios = require('axios')
 let split = '|'
 let handler = async (m, { alfa, args: [effect], text: txt, usedPrefix, command }) => {
+  try { 
 if (!text) throw 'Type .textpro <effect name>\n*Example:*\n.textpro space elyaas\n\n╭─❑ ${sa} LIST EFFECT ${sb} \n' + effects.map(v => v.title).join('\n│ • ')
   effect = effect.toLowerCase()
   if (!effects.find(v => (new RegExp(v.title, 'gi')).test(effect))) throw `Efek *${effect}* not found`
@@ -12,10 +13,22 @@ if (!text) throw 'Type .textpro <effect name>\n*Example:*\n.textpro space elyaas
   let result = await axios.get(res, {
     responseType: 'arraybuffer'
   })
-  await conn.reply(m.chat, '*Making.....*')
+  await msgsz.reply(m.chat, '*Making.....*')
   await alfa.sendFile(m.chat, result.data, 'textpro.jpg', `*TEXTPRO*\n*Effect:* ${effect}`, m)
 } 
-handler.help1 = ['textpro'].map(v => v + ' <effect> <text>')
+catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['textpro'].map(v => v + ' <effect> <text>')
 handler.help = ['𝚃𝙴𝚇𝚃𝙿𝚁𝙾'].map(v => v + '')
 handler.tags = ['maker']
 handler.command = /^(textpro)$/i

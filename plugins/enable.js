@@ -1,5 +1,5 @@
-let handler = async (m, { msgsz, usedPrefix, command, args, isOwner, isAdmin, isROwner }) => {
-  let isEnable = /true|enable|(turn)?on|1/i.test(command)
+let handler = async (m, { msgsz, usedPrefix, command, args, isOwner, isAdmin, isROwner    }) => {
+ try {   let isEnable = /true|enable|(turn)?on|1/i.test(command)
   let chat = global.db.data.chats[m.chat]
   let user = global.db.data.users[m.sender]
   let setting = global.db.data.settings
@@ -429,12 +429,26 @@ ${usedPrefix}off welcome
 `.trim(), m)
 }
 
-  handler.help1 = ['ᴏɴ', 'ᴏғғ'].map(v => v + ' <ᴏᴘᴛɪᴏɴ>')
+     
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ᴏɴ', 'ᴏғғ'].map(v => v + ' <ᴏᴘᴛɪᴏɴ>')
   handler.help = ['𝙾𝙽']
   handler.help = ['𝙾𝙵𝙵']
 
   handler.tags = ['group', 'owner']
-  handler.command = /^((en|dis)able|(tru|fals)e|(turn)?o(n|ff)|[01])$/i
+  handler.command = /^((en|dis)able|(turn)?o(n|ff)|[01])$/i
   
   module.exports = handler
   

@@ -1,5 +1,5 @@
-let handler = async (m, { msgsz, text, usedPrefix, args, participants }) => {
-  var time = db.data.users[m.sender].lastjoin + 86400000
+let handler = async (m, { msgsz, text, usedPrefix, args, participants    }) => {
+ try {   var time = db.data.users[m.sender].lastjoin + 86400000
   if (new Date - db.data.users[m.sender].lastjoin < 86400000) throw `You've used the daily bot invite limit today\nwait for ${msToTime(time - new Date())} again`
   var linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})/i
   var delay = time => new Promise(res => setTimeout(res, time))
@@ -10,7 +10,7 @@ let handler = async (m, { msgsz, text, usedPrefix, args, participants }) => {
   if (!args[0]) throw `where's the link?` 
   if (!code) throw `Invalid link!`
   var anubot = owner[0]
-  conn.reply(m.chat, `Wait 3 seconds the bot will join`)
+  msgsz.reply(m.chat, `Wait 3 seconds the bot will join`)
   await delay(3000)
   try {
   var res = await msgsz.groupAcceptInvite(code)
@@ -22,7 +22,7 @@ let handler = async (m, { msgsz, text, usedPrefix, args, participants }) => {
   var now = new Date() * 1
   if (now < global.db.data.chats[res].expired) global.db.data.chats[res].expired += jumlahHari
   else global.db.data.chats[res].expired = now + jumlahHari
-  if (e.length) await conn.reply(m.chat, `Successfully invited bot to the group\n\n${await msgsz.getName(res)}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`)
+  if (e.length) await msgsz.reply(m.chat, `Successfully invited bot to the group\n\n${await msgsz.getName(res)}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`)
   if (e.length) await msgsz.reply(res, `My @${anubot} Owner is here, I just want to get out, I'm afraid He'll be angry
 
 @${msgsz.user.jid.split(`@`)[0]} will come out in 5 seconds
@@ -36,7 +36,7 @@ Thanks for inviting me @${m.sender.split('@')[0]}`, fkonn, {
      await msgsz.reply(owner[0]+'@s.whatsapp.net', `*INVITING!*\n\n@${m.sender.split('@')[0]}has invited ${msgsz.user.name} to group\n\n${await msgsz.getName(res)}\n\n${res}\n\nMessage : ${args[0]}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`, null, {mentions: [m.sender]})
      })
      if (!e.length) await msgsz.reply(owner[0]+'@s.whatsapp.net', `*INVITING!*\n\n@${m.sender.split('@')[0]} has invited ${msgsz.user.name} to group\n\n${await msgsz.getName(res)}\n\n${res}\n\nMessage : ${args[0]}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`, null, {mentions: [m.sender]})
-     if (!e.length) await conn.reply(m.chat, `Successfully invited bot to the group\n\n${await msgsz.getName(res)}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`).then(async () => {
+     if (!e.length) await msgsz.reply(m.chat, `Successfully invited bot to the group\n\n${await msgsz.getName(res)}\n\nThe bot will exit automatically after *${msToDate(global.db.data.chats[res].expired - now)}*`).then(async () => {
      let mes = `Hello Everyone👋🏻
 
 *${msgsz.user.name}* is a WhatsApp Multi-Device Bot built with Node.js, *${msgsz.user.name}* Just been invited by @${m.sender.split('@')[0]}
@@ -54,7 +54,21 @@ To use *${msgsz.user.name}* please type
       throw `Sorry bots can't join the group!`
       }
 }
-handler.help1 = ['ᴊᴏɪɴ <ᴄʜᴀᴛ.ᴡʜᴀᴛsᴀᴘᴘ.ᴄᴏᴍ>']
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = ['ᴊᴏɪɴ <ᴄʜᴀᴛ.ᴡʜᴀᴛsᴀᴘᴘ.ᴄᴏᴍ>']
 
 handler.help = ['𝙹𝙾𝙸𝙽']
 handler.tags = ['main']

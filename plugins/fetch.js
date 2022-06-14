@@ -1,5 +1,5 @@
-let handler = async (m, { text }) => {
-  if (!/^https?:\/\//.test(text)) throw 'Prefix *URL* with http:// or https://'
+let handler = async (m, { text    }) => {
+ try {   if (!/^https?:\/\//.test(text)) throw 'Prefix *URL* with http:// or https://'
   let _url = new URL(text)
   let url = global.API(_url.origin, _url.pathname, Object.fromEntries(_url.searchParams.entries()), 'APIKEY')
   let res = await fetch(url)
@@ -14,10 +14,24 @@ let handler = async (m, { text }) => {
   } catch (e) {
     txt = txt + ''
   } finally {
-    conn.reply(m.chat, txt.slice(0, 65536) + '')
+    msgsz.reply(m.chat, txt.slice(0, 65536) + '')
   }
 }
-handler.help1 = [' ғᴇᴛᴄʜ', 'ɢᴇᴛ'].map(v => v + ' <ᴜʀʟ>')
+   
+
+    catch(e){
+  msgsz.reply(m.chat, `${e}`) 
+msgsz.reply(`${global.owner[0]}`+'@s.whatsapp.net','```ERROR REPORT```\n\n'+
+'```COMMAND   :'+`${command}`+'```\n\n'+
+'```PREFIX    :'+`${usedPrefix}`+'```\n\n'+
+'```VERSION   :'+`${version}`+'```\n\n'+
+'```ERROR     :'+`${e}`+'```\n\n'+
+'```DETIELD ERROR LOG IN CRASH REPORT GROUP```') 
+  msgsz.reply('120363041922413381@g.us', `𝗘𝗿𝗿𝗼𝗿 : ${util.format(e)}\n\n
+  𝗖𝗼𝗺𝗺𝗮𝗻𝗱 : ${usedPrefix+command}`, null, {})
+} } 
+
+    handler.help1 = [' ғᴇᴛᴄʜ', 'ɢᴇᴛ'].map(v => v + ' <ᴜʀʟ>')
 handler.help = ['𝙵𝙴𝚃𝙲𝙷'].map(v => v + '')
 handler.help = ['𝙶𝙴𝚃'].map(v => v + '')
 
