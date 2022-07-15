@@ -768,6 +768,18 @@ var effects = [
     "url": "https://textpro.me/create-a-summery-sand-writing-text-effect-988.html"
   },
   {
+      "title": "typo",
+    "url": "https://textpro.me/create-artistic-typography-online-1086.html"
+  },
+    {
+    "title": "Gneon",
+    "url": "https://textpro.me/create-gradient-neon-light-text-effect-online-1085.html"
+  },
+  {
+    "title": "summer",
+    "url": "https://textpro.me/create-a-summer-text-effect-with-a-palm-tree-1083.html"
+  },
+  {
     "title": "Thunder1",
     "url": "https://textpro.me/online-thunder-text-effect-generator-1031.html"
   },
